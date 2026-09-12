@@ -36,12 +36,12 @@
     {
       "@type": "Question",
       "name": "What's the difference between markup and profit margin?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Markup is a percentage added on top of your costs to cover business risk, tool wear, and incidentals. Profit margin is the additional percentage you add on top of that as your actual take-home profit. This calculator treats them as two separate layers so you can see each one broken out." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Markup is a percentage added on top of your costs (Cost x (1 + markup%)). Profit margin works differently - it's the percentage of your final price that ends up as profit, calculated as Cost / (1 - margin%). A 15% margin and a 15% markup are not the same number: on $8,000 in costs, a 15% margin gives a $9,412 quote, while a 15% markup only gives $9,200. This calculator uses the true margin formula so your profit percentage is accurate to your final quote, not just your cost." }
     },
     {
       "@type": "Question",
       "name": "How is the recommended quote calculated?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Labor, materials, and subcontractor costs are added together as direct costs. Overhead is added as a flat amount. Contingency, markup, and profit margin are then applied as sequential percentages on top of the running subtotal, ending in the final recommended quote." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Labor, materials, and subcontractor costs are added together as direct costs, then overhead is added as a flat amount. Contingency and markup are applied as sequential percentages on top of that running subtotal. Profit margin is applied last using the true margin formula (dividing by 1 minus the margin percentage, capped at 95%) so it represents a share of your final quote rather than another markup layer." }
     }
   ]
 }
@@ -130,6 +130,11 @@
     padding: 13px 22px; cursor: pointer; width: 100%; margin-top: 6px;
   }
   .btn-primary:hover{ background: #16304C; }
+
+  .calc-note{
+    font-size: 12.5px; color: #B4560E; background: var(--amber-soft); border-radius: 6px;
+    padding: 8px 10px; margin: 10px 0 0; display: none;
+  }
 
   .results-panel{
     background: var(--navy); border-radius: 12px; padding: 26px; color: #fff;
@@ -225,18 +230,19 @@
       </div>
       <div class="field-row">
         <label for="f-contingency">Contingency %<span class="hint">Buffer for the unexpected</span></label>
-        <input type="number" id="f-contingency" min="0" step="any" placeholder="0" value="5">
+        <input type="number" id="f-contingency" min="0" max="50" step="any" placeholder="0" value="5">
       </div>
       <div class="field-row">
         <label for="f-markup">Markup %<span class="hint">Covers business risk & incidentals</span></label>
-        <input type="number" id="f-markup" min="0" step="any" placeholder="0" value="10">
+        <input type="number" id="f-markup" min="0" max="100" step="any" placeholder="0" value="10">
       </div>
       <div class="field-row">
-        <label for="f-profit">Profit Margin %<span class="hint">Your target take-home profit</span></label>
-        <input type="number" id="f-profit" min="0" step="any" placeholder="0" value="15">
+        <label for="f-profit">Profit Margin %<span class="hint">Target profit as % of final price</span></label>
+        <input type="number" id="f-profit" min="0" max="95" step="any" placeholder="0" value="15">
       </div>
 
-      <button class="btn-primary" id="calc-btn" type="button">Calculate quote</button>
+      <button class="btn-primary" id="calc-btn" type="button">Recalculate quote</button>
+      <p class="calc-note" id="calc-note"></p>
     </div>
 
     <div class="results-panel">
@@ -259,7 +265,7 @@
   <section class="info" id="how-it-works">
     <h2>How this contractor estimate calculator works</h2>
     <p>Most estimate templates only ask for a lump sum, which makes it easy to accidentally underprice a job. This calculator builds your quote in layers instead, so you can see exactly where the money goes before you send it to a client.</p>
-    <p>Labor, materials, and subcontractor costs are added together as your direct costs. Overhead is added as a flat amount on top. From there, contingency, markup, and profit margin are applied as separate percentages, each one calculated on the running subtotal - so you can see precisely how much of your final number is buffer, how much is business overhead recovery, and how much is your actual profit.</p>
+    <p>Labor, materials, and subcontractor costs are added together as your direct costs. Overhead is added as a flat amount on top. Contingency and markup are then applied as percentages on the running subtotal. Profit margin is calculated last using the true margin formula, so it represents a share of your final quote rather than another cost-plus layer - a detail most free calculators get wrong, and one that can quietly cost you real money on every job.</p>
   </section>
 
   <section class="info" id="terms">
@@ -287,7 +293,7 @@
       </div>
       <div class="term-card">
         <h3>Markup vs. profit margin</h3>
-        <p>Markup covers business risk and incidentals on top of cost; profit margin is the additional percentage you add as your actual take-home profit.</p>
+        <p>Markup adds a percentage on top of your cost. Profit margin is the percentage of your final price that's actual profit - getting it right means dividing, not adding, which is why a 15% margin and a 15% markup produce different totals.</p>
       </div>
     </div>
   </section>
@@ -300,11 +306,11 @@
     </div>
     <div class="faq-item">
       <h3>What's the difference between markup and profit margin?</h3>
-      <p>Markup is a percentage added on top of your costs to cover business risk, tool wear, and incidentals. Profit margin is the additional percentage you add on top of that as your actual take-home profit. This calculator treats them as two separate layers so you can see each one broken out.</p>
+      <p>Markup is a percentage added on top of your costs (Cost × (1 + markup%)). Profit margin works differently - it's the percentage of your final price that ends up as profit, calculated as Cost ÷ (1 − margin%). A 15% margin and a 15% markup are not the same number: on $8,000 in costs, a 15% margin gives a $9,412 quote, while a 15% markup only gives $9,200. This calculator uses the true margin formula so your profit percentage is accurate to your final quote, not just your cost.</p>
     </div>
     <div class="faq-item">
       <h3>How is the recommended quote calculated?</h3>
-      <p>Labor, materials, and subcontractor costs are added together as direct costs. Overhead is added as a flat amount. Contingency, markup, and profit margin are then applied as sequential percentages on top of the running subtotal, ending in the final recommended quote.</p>
+      <p>Labor, materials, and subcontractor costs are added together as direct costs, then overhead is added as a flat amount. Contingency and markup are applied as sequential percentages on top of that running subtotal. Profit margin is applied last using the true margin formula (dividing by 1 minus the margin percentage, capped at 95%) so it represents a share of your final quote rather than another markup layer.</p>
     </div>
   </section>
 </main>
@@ -321,9 +327,18 @@
 
   let lastResult = null;
 
+  const CONTINGENCY_MAX = 50;
+  const MARKUP_MAX = 100;
+  const PROFIT_MAX = 95;
+
   function num(id){
     const v = parseFloat($(id).value);
     return isNaN(v) || v < 0 ? 0 : v;
+  }
+
+  function clamped(id, max){
+    const v = num(id);
+    return v > max ? max : v;
   }
 
   function calculate(){
@@ -331,9 +346,15 @@
     const materials = num('f-materials');
     const subcontractor = num('f-subcontractor');
     const overhead = num('f-overhead');
-    const contingencyPct = num('f-contingency');
-    const markupPct = num('f-markup');
-    const profitPct = num('f-profit');
+
+    const contingencyPct = clamped('f-contingency', CONTINGENCY_MAX);
+    const markupPct = clamped('f-markup', MARKUP_MAX);
+    const profitPct = clamped('f-profit', PROFIT_MAX);
+
+    const capNotes = [];
+    if (num('f-contingency') > CONTINGENCY_MAX) capNotes.push('Contingency capped at ' + CONTINGENCY_MAX + '%');
+    if (num('f-markup') > MARKUP_MAX) capNotes.push('Markup capped at ' + MARKUP_MAX + '%');
+    if (num('f-profit') > PROFIT_MAX) capNotes.push('Profit margin capped at ' + PROFIT_MAX + '%');
 
     const directCosts = labor + materials + subcontractor;
     const afterOverhead = directCosts + overhead;
@@ -344,8 +365,11 @@
     const markupAmt = afterContingency * (markupPct / 100);
     const afterMarkup = afterContingency + markupAmt;
 
-    const profitAmt = afterMarkup * (profitPct / 100);
-    const total = afterMarkup + profitAmt;
+    // Profit margin is a % of the FINAL price, not another cost-plus layer like markup.
+    // True margin math: Total = Cost / (1 - margin%). A 15% margin and a 15% markup
+    // are NOT the same number, which is why this divides instead of multiplying.
+    const total = afterMarkup / (1 - profitPct / 100);
+    const profitAmt = total - afterMarkup;
 
     lastResult = {
       labor, materials, subcontractor, overhead,
@@ -364,9 +388,17 @@
     $('b-contingency').textContent = fmt(contingencyAmt);
     $('b-markup-label').textContent = 'Markup (' + markupPct + '%)';
     $('b-markup').textContent = fmt(markupAmt);
-    $('b-profit-label').textContent = 'Profit (' + profitPct + '%)';
+    $('b-profit-label').textContent = 'Profit margin (' + profitPct + '%)';
     $('b-profit').textContent = fmt(profitAmt);
     $('b-total').textContent = fmt(total);
+
+    const noteEl = $('calc-note');
+    if (capNotes.length){
+      noteEl.textContent = capNotes.join(' · ');
+      noteEl.style.display = 'block';
+    } else {
+      noteEl.style.display = 'none';
+    }
 
     $('download-btn').disabled = false;
   }
@@ -429,6 +461,9 @@
 
     doc.save('contractor-estimate.pdf');
   }
+
+  const inputIds = ['f-labor','f-materials','f-subcontractor','f-overhead','f-contingency','f-markup','f-profit'];
+  inputIds.forEach(function(id){ $(id).addEventListener('input', calculate); });
 
   $('calc-btn').addEventListener('click', calculate);
   $('download-btn').addEventListener('click', downloadPdf);
