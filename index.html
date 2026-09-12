@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Contractor Estimate Calculator & Quote Template | QuoteCraft</title>
+<meta name="description" content="Free contractor estimate calculator - enter labor, materials, subcontractor costs, overhead, contingency, markup, and profit margin to get a recommended quote, then download it as a professional PDF estimate template.">
+<link rel="canonical" href="https://YOURDOMAIN.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Contractor Estimate Calculator | QuoteCraft">
+<meta property="og:description" content="Enter your job costs and get a recommended quote plus a downloadable PDF contractor estimate template.">
+<meta property="og:url" content="https://YOURDOMAIN.com/">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "QuoteCraft",
+  "url": "https://YOURDOMAIN.com/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any (web-based)",
+  "description": "Free contractor estimate calculator that turns job costs (labor, materials, subcontractor, overhead, contingency, markup, profit margin) into a recommended quote and a downloadable PDF estimate template.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is this contractor estimate calculator free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. The calculator and the PDF estimate download are both free, with no account or sign-up required." }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between markup and profit margin?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Markup is a percentage added on top of your costs to cover business risk, tool wear, and incidentals. Profit margin is the additional percentage you add on top of that as your actual take-home profit. This calculator treats them as two separate layers so you can see each one broken out." }
+    },
+    {
+      "@type": "Question",
+      "name": "How is the recommended quote calculated?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Labor, materials, and subcontractor costs are added together as direct costs. Overhead is added as a flat amount. Contingency, markup, and profit margin are then applied as sequential percentages on top of the running subtotal, ending in the final recommended quote." }
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F7F8FA;
+    --surface: #FFFFFF;
+    --surface-soft: #EEF1F5;
+    --border: #DCE1E8;
+    --ink: #16202B;
+    --ink-soft: #55606D;
+    --ink-faint: #8B95A1;
+    --navy: #1B3A5C;
+    --navy-soft: rgba(27,58,92,0.08);
+    --amber: #E08A00;
+    --amber-soft: rgba(224,138,0,0.12);
+    --font-display: 'Manrope', system-ui, sans-serif;
+    --font-body: 'Source Sans 3', system-ui, sans-serif;
+  }
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+  header.site{ background: var(--navy); }
+  .site-nav{
+    max-width: 980px; margin: 0 auto; padding: 16px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .brand{
+    font-family: var(--font-display); font-weight: 800; font-size: 19px;
+    color: #fff; text-decoration: none; display: flex; align-items: center; gap: 8px;
+  }
+  .brand .accent{ color: var(--amber); }
+  .site-nav a.link{
+    font-family: var(--font-body); font-size: 14px; font-weight: 600;
+    color: rgba(255,255,255,0.75); text-decoration: none; margin-left: 24px;
+  }
+  .site-nav a.link:hover{ color: #fff; }
+
+  main{ padding: 44px 0 80px; }
+
+  .eyebrow{
+    font-family: var(--font-body); font-size: 13px; font-weight: 700; letter-spacing: 0.04em;
+    color: var(--amber); text-transform: uppercase; margin: 0 0 12px;
+  }
+  h1{
+    font-family: var(--font-display); font-weight: 800; font-size: clamp(28px, 4.4vw, 40px);
+    line-height: 1.18; margin: 0 0 14px; letter-spacing: -0.01em; color: var(--navy);
+  }
+  .lede{ font-size: 16px; color: var(--ink-soft); line-height: 1.65; margin: 0 0 34px; max-width: 640px; }
+
+  .calc-layout{ display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px; align-items: start; }
+  @media (max-width: 800px){ .calc-layout{ grid-template-columns: 1fr; } }
+
+  .panel{
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 26px;
+  }
+  .panel h2.panel-title{
+    font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--navy);
+    margin: 0 0 18px;
+  }
+  .field-row{ display: grid; grid-template-columns: 1fr 130px; gap: 12px; align-items: center; margin-bottom: 14px; }
+  .field-row label{ font-family: var(--font-body); font-weight: 600; font-size: 14px; }
+  .field-row .hint{ display: block; font-weight: 400; font-size: 12px; color: var(--ink-faint); margin-top: 2px; }
+  .field-row input{
+    font-family: var(--font-body); font-size: 15px; color: var(--ink); text-align: right;
+    background: var(--surface-soft); border: 1px solid var(--border); border-radius: 8px;
+    padding: 9px 10px; width: 100%;
+  }
+  .field-row input:focus{ outline: none; border-color: var(--navy); }
+
+  .btn-primary{
+    font-family: var(--font-display); font-weight: 700; font-size: 15px;
+    color: #fff; background: var(--navy); border: none; border-radius: 8px;
+    padding: 13px 22px; cursor: pointer; width: 100%; margin-top: 6px;
+  }
+  .btn-primary:hover{ background: #16304C; }
+
+  .results-panel{
+    background: var(--navy); border-radius: 12px; padding: 26px; color: #fff;
+    position: sticky; top: 20px;
+  }
+  .results-panel .quote-label{
+    font-family: var(--font-body); font-size: 13px; font-weight: 600; letter-spacing: 0.03em;
+    color: rgba(255,255,255,0.65); text-transform: uppercase; margin: 0 0 8px;
+  }
+  .results-panel .quote-amount{
+    font-family: var(--font-display); font-weight: 800; font-size: 40px; margin: 0 0 22px; color: var(--amber);
+  }
+  .breakdown-row{
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.12); font-size: 14px;
+  }
+  .breakdown-row .b-label{ color: rgba(255,255,255,0.75); }
+  .breakdown-row .b-value{ font-family: var(--font-display); font-weight: 700; }
+  .breakdown-row.total{ border-bottom: none; margin-top: 4px; padding-top: 14px; font-size: 15px; }
+
+  .btn-download{
+    font-family: var(--font-display); font-weight: 700; font-size: 14.5px;
+    color: var(--navy); background: var(--amber); border: none; border-radius: 8px;
+    padding: 12px 20px; cursor: pointer; width: 100%; margin-top: 20px;
+  }
+  .btn-download:hover{ opacity: 0.92; }
+  .btn-download:disabled{ opacity: 0.5; cursor: default; }
+
+  section.info{ margin-top: 64px; }
+  h2{
+    font-family: var(--font-display); font-weight: 700; font-size: 23px; color: var(--navy);
+    margin: 0 0 16px; letter-spacing: -0.005em;
+  }
+  section.info p{ font-size: 15px; line-height: 1.7; color: var(--ink-soft); margin: 0 0 16px; }
+
+  .term-grid{ display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 18px 0 8px; }
+  @media (max-width: 640px){ .term-grid{ grid-template-columns: 1fr; } }
+  .term-card{
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px;
+  }
+  .term-card h3{
+    font-family: var(--font-display); font-size: 15px; font-weight: 700; margin: 0 0 6px; color: var(--navy);
+  }
+  .term-card p{ font-size: 13.5px; color: var(--ink-soft); margin: 0; line-height: 1.6; }
+
+  .faq-item{ border-bottom: 1px solid var(--border); padding: 18px 0; }
+  .faq-item h3{ font-family: var(--font-display); font-size: 16px; font-weight: 700; margin: 0 0 8px; color: var(--navy); }
+  .faq-item p{ font-size: 14.5px; color: var(--ink-soft); margin: 0; line-height: 1.7; }
+
+  footer{
+    border-top: 1px solid var(--border); margin-top: 70px; padding: 28px 0;
+    font-size: 12.5px; color: var(--ink-faint); text-align: center; line-height: 1.8;
+  }
+  footer a{ color: var(--navy); }
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="site-nav">
+    <a class="brand" href="/">Quote<span class="accent">Craft</span></a>
+    <nav>
+      <a class="link" href="#how-it-works">How it works</a>
+      <a class="link" href="#terms">Terms explained</a>
+      <a class="link" href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="eyebrow">Free Tool</p>
+  <h1>Free Contractor Estimate Calculator</h1>
+  <p class="lede">Enter your job costs below to get a recommended quote, broken down line by line - then download it as a professional contractor estimate template you can hand straight to the client.</p>
+
+  <div class="calc-layout">
+    <div class="panel">
+      <h2 class="panel-title">Job Costs</h2>
+
+      <div class="field-row">
+        <label for="f-labor">Labor<span class="hint">Total labor cost for this job</span></label>
+        <input type="number" id="f-labor" min="0" step="any" placeholder="0" value="2500">
+      </div>
+      <div class="field-row">
+        <label for="f-materials">Materials<span class="hint">Total materials cost</span></label>
+        <input type="number" id="f-materials" min="0" step="any" placeholder="0" value="1800">
+      </div>
+      <div class="field-row">
+        <label for="f-subcontractor">Subcontractor<span class="hint">Any subcontracted work</span></label>
+        <input type="number" id="f-subcontractor" min="0" step="any" placeholder="0" value="0">
+      </div>
+      <div class="field-row">
+        <label for="f-overhead">Overhead<span class="hint">Insurance, tools, vehicle, etc.</span></label>
+        <input type="number" id="f-overhead" min="0" step="any" placeholder="0" value="750">
+      </div>
+      <div class="field-row">
+        <label for="f-contingency">Contingency %<span class="hint">Buffer for the unexpected</span></label>
+        <input type="number" id="f-contingency" min="0" step="any" placeholder="0" value="5">
+      </div>
+      <div class="field-row">
+        <label for="f-markup">Markup %<span class="hint">Covers business risk & incidentals</span></label>
+        <input type="number" id="f-markup" min="0" step="any" placeholder="0" value="10">
+      </div>
+      <div class="field-row">
+        <label for="f-profit">Profit Margin %<span class="hint">Your target take-home profit</span></label>
+        <input type="number" id="f-profit" min="0" step="any" placeholder="0" value="15">
+      </div>
+
+      <button class="btn-primary" id="calc-btn" type="button">Calculate quote</button>
+    </div>
+
+    <div class="results-panel">
+      <p class="quote-label">Recommended Quote</p>
+      <p class="quote-amount" id="quote-total">$0</p>
+
+      <div class="breakdown-row"><span class="b-label">Labor</span><span class="b-value" id="b-labor">$0</span></div>
+      <div class="breakdown-row"><span class="b-label">Materials</span><span class="b-value" id="b-materials">$0</span></div>
+      <div class="breakdown-row"><span class="b-label">Subcontractor</span><span class="b-value" id="b-subcontractor">$0</span></div>
+      <div class="breakdown-row"><span class="b-label">Overhead</span><span class="b-value" id="b-overhead">$0</span></div>
+      <div class="breakdown-row"><span class="b-label" id="b-contingency-label">Contingency</span><span class="b-value" id="b-contingency">$0</span></div>
+      <div class="breakdown-row"><span class="b-label" id="b-markup-label">Markup</span><span class="b-value" id="b-markup">$0</span></div>
+      <div class="breakdown-row"><span class="b-label" id="b-profit-label">Profit</span><span class="b-value" id="b-profit">$0</span></div>
+      <div class="breakdown-row total"><span class="b-label">Total Quote</span><span class="b-value" id="b-total">$0</span></div>
+
+      <button class="btn-download" id="download-btn" type="button">Download Professional Estimate (PDF)</button>
+    </div>
+  </div>
+
+  <section class="info" id="how-it-works">
+    <h2>How this contractor estimate calculator works</h2>
+    <p>Most estimate templates only ask for a lump sum, which makes it easy to accidentally underprice a job. This calculator builds your quote in layers instead, so you can see exactly where the money goes before you send it to a client.</p>
+    <p>Labor, materials, and subcontractor costs are added together as your direct costs. Overhead is added as a flat amount on top. From there, contingency, markup, and profit margin are applied as separate percentages, each one calculated on the running subtotal - so you can see precisely how much of your final number is buffer, how much is business overhead recovery, and how much is your actual profit.</p>
+  </section>
+
+  <section class="info" id="terms">
+    <h2>Estimate terms, explained</h2>
+    <div class="term-grid">
+      <div class="term-card">
+        <h3>Labor</h3>
+        <p>The cost of your own time and any employees working the job, usually hours × rate.</p>
+      </div>
+      <div class="term-card">
+        <h3>Materials</h3>
+        <p>Everything you're buying for the job itself - lumber, fixtures, paint, hardware, and so on.</p>
+      </div>
+      <div class="term-card">
+        <h3>Subcontractor</h3>
+        <p>Any portion of the job you're paying another contractor or specialist to handle.</p>
+      </div>
+      <div class="term-card">
+        <h3>Overhead</h3>
+        <p>The fixed cost of running your business day to day - insurance, vehicle, tools, software - allocated to this job.</p>
+      </div>
+      <div class="term-card">
+        <h3>Contingency</h3>
+        <p>A buffer percentage to cover surprises once the job is underway, without eating into your profit.</p>
+      </div>
+      <div class="term-card">
+        <h3>Markup vs. profit margin</h3>
+        <p>Markup covers business risk and incidentals on top of cost; profit margin is the additional percentage you add as your actual take-home profit.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="info" id="faq">
+    <h2>FAQ</h2>
+    <div class="faq-item">
+      <h3>Is this contractor estimate calculator free?</h3>
+      <p>Yes - the calculator and the PDF download are both free, with no account or sign-up required.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What's the difference between markup and profit margin?</h3>
+      <p>Markup is a percentage added on top of your costs to cover business risk, tool wear, and incidentals. Profit margin is the additional percentage you add on top of that as your actual take-home profit. This calculator treats them as two separate layers so you can see each one broken out.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How is the recommended quote calculated?</h3>
+      <p>Labor, materials, and subcontractor costs are added together as direct costs. Overhead is added as a flat amount. Contingency, markup, and profit margin are then applied as sequential percentages on top of the running subtotal, ending in the final recommended quote.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  QuoteCraft is an independent free tool for contractors and is not affiliated with any accounting, legal, or licensing body. Always confirm final pricing against your own costs and local market rates. <a href="/">Back to top ↑</a>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+(function(){
+  const $ = (id) => document.getElementById(id);
+  const fmt = (n) => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+
+  let lastResult = null;
+
+  function num(id){
+    const v = parseFloat($(id).value);
+    return isNaN(v) || v < 0 ? 0 : v;
+  }
+
+  function calculate(){
+    const labor = num('f-labor');
+    const materials = num('f-materials');
+    const subcontractor = num('f-subcontractor');
+    const overhead = num('f-overhead');
+    const contingencyPct = num('f-contingency');
+    const markupPct = num('f-markup');
+    const profitPct = num('f-profit');
+
+    const directCosts = labor + materials + subcontractor;
+    const afterOverhead = directCosts + overhead;
+
+    const contingencyAmt = afterOverhead * (contingencyPct / 100);
+    const afterContingency = afterOverhead + contingencyAmt;
+
+    const markupAmt = afterContingency * (markupPct / 100);
+    const afterMarkup = afterContingency + markupAmt;
+
+    const profitAmt = afterMarkup * (profitPct / 100);
+    const total = afterMarkup + profitAmt;
+
+    lastResult = {
+      labor, materials, subcontractor, overhead,
+      contingencyPct, contingencyAmt,
+      markupPct, markupAmt,
+      profitPct, profitAmt,
+      total
+    };
+
+    $('quote-total').textContent = fmt(total);
+    $('b-labor').textContent = fmt(labor);
+    $('b-materials').textContent = fmt(materials);
+    $('b-subcontractor').textContent = fmt(subcontractor);
+    $('b-overhead').textContent = fmt(overhead);
+    $('b-contingency-label').textContent = 'Contingency (' + contingencyPct + '%)';
+    $('b-contingency').textContent = fmt(contingencyAmt);
+    $('b-markup-label').textContent = 'Markup (' + markupPct + '%)';
+    $('b-markup').textContent = fmt(markupAmt);
+    $('b-profit-label').textContent = 'Profit (' + profitPct + '%)';
+    $('b-profit').textContent = fmt(profitAmt);
+    $('b-total').textContent = fmt(total);
+
+    $('download-btn').disabled = false;
+  }
+
+  function downloadPdf(){
+    if (!lastResult) return;
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: 'pt', format: 'letter' });
+    const r = lastResult;
+    const left = 56;
+    let y = 64;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(20);
+    doc.text('Contractor Estimate', left, y);
+    y += 20;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(90, 90, 90);
+    doc.text('Generated with QuoteCraft — ' + new Date().toLocaleDateString('en-US'), left, y);
+    y += 34;
+
+    doc.setDrawColor(220, 220, 220);
+    doc.line(left, y, 556, y);
+    y += 28;
+
+    doc.setTextColor(20, 20, 20);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(12);
+    doc.text('Cost Breakdown', left, y);
+    y += 22;
+
+    const rows = [
+      ['Labor', r.labor],
+      ['Materials', r.materials],
+      ['Subcontractor', r.subcontractor],
+      ['Overhead', r.overhead],
+      ['Contingency (' + r.contingencyPct + '%)', r.contingencyAmt],
+      ['Markup (' + r.markupPct + '%)', r.markupAmt],
+      ['Profit Margin (' + r.profitPct + '%)', r.profitAmt],
+    ];
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(11);
+    rows.forEach(function(row){
+      doc.text(row[0], left, y);
+      doc.text('$' + row[1].toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), 556, y, { align: 'right' });
+      y += 22;
+    });
+
+    y += 8;
+    doc.setDrawColor(220, 220, 220);
+    doc.line(left, y, 556, y);
+    y += 28;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(15);
+    doc.text('Recommended Quote', left, y);
+    doc.text('$' + r.total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), 556, y, { align: 'right' });
+
+    doc.save('contractor-estimate.pdf');
+  }
+
+  $('calc-btn').addEventListener('click', calculate);
+  $('download-btn').addEventListener('click', downloadPdf);
+  $('download-btn').disabled = true;
+
+  calculate();
+})();
+</script>
+</body>
+</html>
