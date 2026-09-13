@@ -273,7 +273,7 @@
     <div class="term-grid">
       <div class="term-card">
         <h3>Labor</h3>
-        <p>The cost of your own time and any employees working the job, usually hours 脳 rate.</p>
+        <p>The cost of your own time and any employees working the job, usually hours × rate.</p>
       </div>
       <div class="term-card">
         <h3>Materials</h3>
@@ -306,7 +306,7 @@
     </div>
     <div class="faq-item">
       <h3>What's the difference between markup and profit margin?</h3>
-      <p>Markup is a percentage added on top of your costs (Cost 脳 (1 + markup%)). Profit margin works differently - it's the percentage of your final price that ends up as profit, calculated as Cost 梅 (1 鈭?margin%). A 15% margin and a 15% markup are not the same number: on $8,000 in costs, a 15% margin gives a $9,412 quote, while a 15% markup only gives $9,200. This calculator uses the true margin formula so your profit percentage is accurate to your final quote, not just your cost.</p>
+      <p>Markup is a percentage added on top of your costs (Cost × (1 + markup%)). Profit margin works differently - it's the percentage of your final price that ends up as profit, calculated as Cost ÷ (1 − margin%). A 15% margin and a 15% markup are not the same number: on $8,000 in costs, a 15% margin gives a $9,412 quote, while a 15% markup only gives $9,200. This calculator uses the true margin formula so your profit percentage is accurate to your final quote, not just your cost.</p>
     </div>
     <div class="faq-item">
       <h3>How is the recommended quote calculated?</h3>
@@ -316,7 +316,7 @@
 </main>
 
 <footer>
-  QuoteCraft is an independent free tool for contractors and is not affiliated with any accounting, legal, or licensing body. Always confirm final pricing against your own costs and local market rates. <a href="/">Back to top 鈫?/a>
+  QuoteCraft is an independent free tool for contractors and is not affiliated with any accounting, legal, or licensing body. Always confirm final pricing against your own costs and local market rates. <a href="/">Back to top ↑</a>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -394,7 +394,7 @@
 
     const noteEl = $('calc-note');
     if (capNotes.length){
-      noteEl.textContent = capNotes.join(' 路 ');
+      noteEl.textContent = capNotes.join(' · ');
       noteEl.style.display = 'block';
     } else {
       noteEl.style.display = 'none';
@@ -418,7 +418,7 @@
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(10);
     doc.setTextColor(90, 90, 90);
-    doc.text('Generated with QuoteCraft 鈥?' + new Date().toLocaleDateString('en-US'), left, y);
+    doc.text('Generated with QuoteCraft — ' + new Date().toLocaleDateString('en-US'), left, y);
     y += 34;
 
     doc.setDrawColor(220, 220, 220);
